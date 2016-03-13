@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.web.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.fengyouchao.seehttp.plugins.browser.controller.BrowserController">
+   <children>
+      <TabPane fx:id="tabPane" layoutX="118.0" layoutY="34.0" prefHeight="462.0" prefWidth="727.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
+        <tabs>
+          <Tab fx:id="newTab" text="+">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <TextField fx:id="locationFiled" layoutX="112.0" layoutY="3.0" minWidth="250.0" prefHeight="4.0" prefWidth="296.0" promptText="Enter website name" AnchorPane.topAnchor="3.0" />
+      <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#goBackAction" text="&lt;" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="3.0" />
+      <Button layoutX="41.0" layoutY="13.0" mnemonicParsing="false" onAction="#goForwardAction" text="&gt;" AnchorPane.leftAnchor="41.0" AnchorPane.topAnchor="3.0" />
+      <Button layoutX="68.0" layoutY="3.0" mnemonicParsing="false" onAction="#reloadAction" text="R" AnchorPane.topAnchor="3.0" />
+   </children>
+</AnchorPane>
