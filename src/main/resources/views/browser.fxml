@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.web.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.fengyouchao.seehttp.plugins.browser.controller.BrowserController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyBoardShortcut" prefHeight="545.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.fengyouchao.seehttp.plugins.browser.controller.BrowserController">
    <children>
       <TabPane fx:id="tabPane" layoutX="118.0" layoutY="34.0" prefHeight="462.0" prefWidth="727.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
         <tabs>
