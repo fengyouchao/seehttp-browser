@@ -1,16 +1,23 @@
 package io.github.fengyouchao.seehttp.plugins.browser.controller;
 
+import javafx.animation.StrokeTransition;
+import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.Tab;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCharacterCombination;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
+import javafx.util.Duration;
 
 /**
  * The class <code>BrowserTab</code> represents tab of browser.
@@ -31,15 +38,21 @@ public class BrowserTab extends Tab {
   private MenuItem reloadItem = new MenuItem("Reload Page");
   private MenuItem closeItem = new MenuItem("Close Tab");
   private MenuItem closeOtherItem = new MenuItem("Close Other Tab");
+  private Tooltip tooltip = new Tooltip();
 
   public BrowserTab(BrowserController browserController) {
     this.browserController = browserController;
     this.setClosable(true);
     this.setText("New Tab");
+    this.setTooltip(tooltip);
     StackPane stackPane = new StackPane();
     stackPane.getChildren().addAll(webView, progressLine);
     progressLine.setLayoutX(0);
     progressLine.setLayoutY(0);
+    progressLine.setStrokeWidth(2);
+    StrokeTransition strokeTransition = new StrokeTransition(Duration.seconds(3), progressLine,Color.DODGERBLUE, new Color(1.0,1.0,1.0,0.8));
+    strokeTransition.setCycleCount(0);
+
     stackPane.setAlignment(Pos.TOP_LEFT);
     this.setContent(stackPane);
     engine = webView.getEngine();
@@ -47,9 +60,12 @@ public class BrowserTab extends Tab {
       browserController.getLocationFiled().setText(newValue);
       currentUrl = newValue;
     });
+    tooltip.textProperty().bind(engine.titleProperty());
     engine.titleProperty().addListener((observable, oldValue, newValue) -> {
       if(newValue!=null && !newValue.equalsIgnoreCase("")){
-        setText(newValue);
+        if(newValue.length()> 5){
+          setText(newValue.substring(0, 5));
+        }
       }
     });
 
@@ -60,6 +76,11 @@ public class BrowserTab extends Tab {
     });
     engine.setCreatePopupHandler(p -> browserController.createNewTab().getEngine());
     progressLine.visibleProperty().bind(engine.getLoadWorker().runningProperty());
+    progressLine.visibleProperty().addListener((observable, oldValue, newValue) -> {
+      if(newValue){
+        strokeTransition.play();
+      }
+    });
     engine.getLoadWorker().progressProperty().addListener((observable, oldValue, newValue) -> {
       double progress = newValue.doubleValue();
       progressLine.setEndX(stackPane.getWidth() * progress);
@@ -101,14 +122,11 @@ public class BrowserTab extends Tab {
 
   public void goBack() {
     WebHistory history = engine.getHistory();
-    System.out.println(history.getCurrentIndex());
     history.go(-1);
-    System.out.println(history.getCurrentIndex());
   }
 
   public void goForward() {
     WebHistory history = engine.getHistory();
-    System.out.println(history.getCurrentIndex());
     history.go(1);
   }
 
