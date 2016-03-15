@@ -26,5 +26,6 @@
       <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#goBackAction" text="&lt;" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="3.0" />
       <Button layoutX="41.0" layoutY="13.0" mnemonicParsing="false" onAction="#goForwardAction" text="&gt;" AnchorPane.leftAnchor="41.0" AnchorPane.topAnchor="3.0" />
       <Button layoutX="68.0" layoutY="3.0" mnemonicParsing="false" onAction="#reloadAction" text="R" AnchorPane.topAnchor="3.0" />
+      <Button mnemonicParsing="false" text="Setting" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="3.0" />
    </children>
 </AnchorPane>
